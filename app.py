@@ -72,7 +72,7 @@ def create_twilio_application(twilio_account_sid,twilio_auth_token):
                             fallback_url=fallback_url,
                         )
     numbers = client.available_phone_numbers(country) \
-               .mobile \
+               .local \
                .list()
 
     number = client.incoming_phone_numbers \
@@ -154,9 +154,9 @@ def create_heroku_deploy_button():
     env[TWILIO_AUTH_TOKEN]={twilio_auth_token}&
     env[TWILIO_MESSAGE_SERVICE_SID]={twilio_message_service_sid}&
     env[TWILIO_STATUS_CALLBACK_URL]={heroku_base_url}/twilio-message-report&
-    env[PHONE_NUMBER_COUNTRY]=AU&
-    env[DST_REFERENCE_TIMEZONE]=Australia/Melbourne&
-    env[NOT_IN_USA]=true&
+    env[PHONE_NUMBER_COUNTRY]=US&
+    env[DST_REFERENCE_TIMEZONE]=United States/Denver&
+    env[NOT_IN_USA]=false&
     env[BULK_SEND_CHUNK_SIZE]=20
     '''.format(**session).replace('\n','').replace(' ','')
     return render_template("deploy.html", deploy_url=deploy_url)
